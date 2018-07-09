@@ -1,16 +1,16 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 
 import {
   MatButtonModule,
   MatCardModule,
   MatCheckboxModule,
   MatDialogModule,
-  MatInputModule,
   MatIconModule,
+  MatInputModule,
   MatListModule,
+  MatRadioModule,
   MatSelectModule,
   MatSidenavModule,
-  MatRadioModule,
   MatTabsModule,
   MatToolbarModule
 } from '@angular/material';
@@ -31,4 +31,5 @@ import {
     MatToolbarModule
   ]
 })
-export class ContactsMaterialModule {}
+export class ContactsMaterialModule {
+}
