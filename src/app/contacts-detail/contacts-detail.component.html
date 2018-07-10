@@ -1,5 +1,5 @@
 <div class="trm-contacts-detail">
-  <mat-card *ngIf="contact">
+  <mat-card *ngIf="contact; else loading">
     <mat-card-title-group class="fullBleed">
       <img mat-card-md-image [src]="contact.image || ''">
       <mat-card-title>{{contact.name || '-'}}</mat-card-title>
@@ -29,4 +29,7 @@
          routerLink="edit"> Edit Contact</button>
     </mat-card-actions>
   </mat-card>
+  <ng-template #loading>
+    Loading ...
+  </ng-template>
 </div>
