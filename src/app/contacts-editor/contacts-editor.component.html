@@ -5,25 +5,32 @@
       <mat-card-title>{{contact?.name}}</mat-card-title>
       <mat-card-subtitle>{{contact?.email || 'No email adress'}}</mat-card-subtitle>
     </mat-card-title-group>
-    <mat-card-content>
-      <div fxLayout="column">
-        <mat-form-field fxFlex>
-          <input matInput placeholder="Name" [(ngModel)]="contact.name">
-        </mat-form-field>
-        <mat-form-field fxFlex>
-          <input matInput placeholder="Email" [(ngModel)]="contact.email">
-        </mat-form-field>
-        <mat-form-field fxFlex>
-          <input matInput placeholder="Phone" [(ngModel)]="contact.phone">
-        </mat-form-field>
-        <mat-form-field fxFlex>
-          <input matInput placeholder="Website" [(ngModel)]="contact.website">
-        </mat-form-field>
-        <mat-form-field fxFlex>
-          <input matInput placeholder="Birthday" [(ngModel)]="contact.birthday" type="date">
-        </mat-form-field>
-        <fieldset fxLayout="column">
-          <legend>Address</legend>
+    <trm-tabs>
+      <trm-tab title="General" fxLayout="column">
+        <mat-card-content>
+          <div fxLayout="column">
+            <br>
+            <mat-form-field fxFlex>
+              <input matInput placeholder="Name" [(ngModel)]="contact.name">
+            </mat-form-field>
+            <mat-form-field fxFlex>
+              <input matInput placeholder="Email" [(ngModel)]="contact.email">
+            </mat-form-field>
+            <mat-form-field fxFlex>
+              <input matInput placeholder="Phone" [(ngModel)]="contact.phone">
+            </mat-form-field>
+            <mat-form-field fxFlex>
+              <input matInput placeholder="Website" [(ngModel)]="contact.website">
+            </mat-form-field>
+            <mat-form-field fxFlex>
+              <input matInput placeholder="Birthday" [(ngModel)]="contact.birthday" type="date">
+            </mat-form-field>
+          </div>
+        </mat-card-content>
+      </trm-tab>
+      <trm-tab title="Address" fxLayout="column">
+        <div fxLayout="column">
+          <br>
           <mat-form-field fxFlex>
             <input matInput placeholder="Street" [(ngModel)]="contact.address.street">
           </mat-form-field>
@@ -33,9 +40,9 @@
           <mat-form-field fxFlex>
             <input matInput placeholder="City" [(ngModel)]="contact.address.city">
           </mat-form-field>
-        </fieldset>
-      </div>
-    </mat-card-content>
+        </div>
+      </trm-tab>
+    </trm-tabs>
     <mat-card-actions fxLayout fxLayoutAlign="center center">
       <button mat-button (click)="save(contact)" title="Save contact">Save</button>
       <button mat-button (click)="cancel(contact)" title="Cancel editing">Cancel</button>

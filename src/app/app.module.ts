@@ -14,9 +14,11 @@ import {HttpClientModule} from '@angular/common/http';
 import {ContactsEditorComponent} from './contacts-editor/contacts-editor.component';
 import {FormsModule} from '@angular/forms';
 import { ContactDetailVieuwComponent } from './contact-detail-vieuw/contact-detail-vieuw.component';
+import { TabComponent } from './tabs/tab/tab.component';
+import { TabsComponent } from './tabs/tabs/tabs.component';
 
 @NgModule({
-  declarations: [ContactsAppComponent, ContactsListComponent, ContactsDetailComponent, ContactsEditorComponent, ContactDetailVieuwComponent],
+  declarations: [ContactsAppComponent, ContactsListComponent, ContactsDetailComponent, ContactsEditorComponent, ContactDetailVieuwComponent, TabComponent, TabsComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
