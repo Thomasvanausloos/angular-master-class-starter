@@ -1,7 +1,7 @@
 <div class="trm-contacts-detail">
-  <mat-card>
+  <mat-card *ngIf="currentContact$ | async as currentContact">
     <mat-card-title-group class="fullBleed">
-      <img mat-card-md-image [src]="currentContact.image">
+      <img mat-card-md-image [src]="currentContact.image || ''">
       <mat-card-title>{{currentContact.name || '-'}}</mat-card-title>
       <mat-card-subtitle>{{currentContact.email || '-'}}</mat-card-subtitle>
     </mat-card-title-group>
@@ -22,8 +22,10 @@
       </dl>
     </mat-card-content>
     <mat-card-actions fxLayout fxLayoutAlign="center center">
-      <a mat-button title="Go back to list"
-      routerLink="/">Go Back</a>
+      <a mat-button title = "Go back to list"
+      [routerLink]="['/']" >Go Back</a>
+      <a mat-button title="Edit contact"
+         routerLink = "edit"> Edit Contact</a>
     </mat-card-actions>
   </mat-card>
 </div>
