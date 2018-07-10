@@ -13,9 +13,10 @@ import {ContactsDetailComponent} from './contacts-detail/contacts-detail.compone
 import {HttpClientModule} from '@angular/common/http';
 import {ContactsEditorComponent} from './contacts-editor/contacts-editor.component';
 import {FormsModule} from '@angular/forms';
+import { ContactDetailVieuwComponent } from './contact-detail-vieuw/contact-detail-vieuw.component';
 
 @NgModule({
-  declarations: [ContactsAppComponent, ContactsListComponent, ContactsDetailComponent, ContactsEditorComponent],
+  declarations: [ContactsAppComponent, ContactsListComponent, ContactsDetailComponent, ContactsEditorComponent, ContactDetailVieuwComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

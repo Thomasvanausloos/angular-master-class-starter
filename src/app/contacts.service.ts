@@ -41,7 +41,7 @@ export class ContactsService {
 
   public searchContact(term: string): Observable<Array<Contact>> {
     return this.http.get<ContactsResponse>(`${this.API_ENDPOINT}/search?text=${term}`).pipe(
-    map(data => data.items)
+      map(data => data.items)
     );
   }
 }
