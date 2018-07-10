@@ -1,24 +1,38 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ContactsService} from '../contacts.service';
 import {Contact} from '../models/contact';
 import {Observable} from 'rxjs/internal/Observable';
+import {debounceTime, distinctUntilChanged, flatMap, merge, switchMap, takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs/internal/Subject';
 
 @Component({
   selector: 'trm-contacts-list',
   templateUrl: './contacts-list.component.html'
 })
-export class ContactsListComponent implements OnInit {
+export class ContactsListComponent implements OnInit, OnDestroy {
 
   constructor(private contactsService: ContactsService) {
   }
 
   contacts$: Observable<Array<Contact>>;
+  term$: Subject<string> = new Subject();
+  unsubscribe$: Subject<boolean> = new Subject<boolean>();
 
   ngOnInit() {
-    this.contacts$ = this.contactsService.getContacts();
+    this.contacts$ = this.term$.pipe(
+      debounceTime(400),
+      distinctUntilChanged(),
+      switchMap(term => this.contactsService.searchContact(term)),
+      merge(this.contactsService.getContacts()),
+      takeUntil(this.unsubscribe$)
+    );
   }
 
   public trackByContactId(id: number, contact: Contact) {
     return contact.id;
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next(true);
   }
 }

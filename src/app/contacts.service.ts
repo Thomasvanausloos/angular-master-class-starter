@@ -1,4 +1,4 @@
-import {Inject, Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Contact} from './models/contact';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/internal/Observable';
@@ -28,7 +28,7 @@ export class ContactsService {
   }
 
   public getContactById(id: string): Observable<Contact> {
-    return this.http.get<ContactResponse>(`${this.API_ENDPOINT}/contacts/${id}` ).pipe(
+    return this.http.get<ContactResponse>(`${this.API_ENDPOINT}/contacts/${id}`).pipe(
       map(data => data.item)
     );
   }
@@ -36,6 +36,12 @@ export class ContactsService {
   public updateContact(contact: Contact): Observable<Contact> {
     return this.http.put<ContactResponse>(`${this.API_ENDPOINT}/contacts/${contact.id}`, contact).pipe(
       map(data => data.item)
+    );
+  }
+
+  public searchContact(term: string): Observable<Array<Contact>> {
+    return this.http.get<ContactsResponse>(`${this.API_ENDPOINT}/search?text=${term}`).pipe(
+    map(data => data.items)
     );
   }
 }
