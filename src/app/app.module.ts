@@ -16,9 +16,18 @@ import {FormsModule} from '@angular/forms';
 import { ContactDetailVieuwComponent } from './contact-detail-vieuw/contact-detail-vieuw.component';
 import { TabComponent } from './tabs/tab/tab.component';
 import { TabsComponent } from './tabs/tabs/tabs.component';
+import {EventBusService} from './eventbus/event-bus.service';
 
 @NgModule({
-  declarations: [ContactsAppComponent, ContactsListComponent, ContactsDetailComponent, ContactsEditorComponent, ContactDetailVieuwComponent, TabComponent, TabsComponent],
+  declarations: [
+    ContactsAppComponent,
+    ContactsListComponent,
+    ContactsDetailComponent,
+    ContactsEditorComponent,
+    ContactDetailVieuwComponent,
+    TabComponent,
+    TabsComponent
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -29,7 +38,8 @@ import { TabsComponent } from './tabs/tabs/tabs.component';
     RouterModule.forRoot(APP_ROUTES)
   ],
   providers: [
-    ContactsService
+    ContactsService,
+    EventBusService
   ],
   bootstrap: [ContactsAppComponent]
 })

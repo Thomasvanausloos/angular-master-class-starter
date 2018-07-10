@@ -4,6 +4,7 @@ import {Contact} from '../models/contact';
 import {Observable} from 'rxjs/internal/Observable';
 import {debounceTime, distinctUntilChanged, flatMap, merge, startWith, switchMap, takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs/internal/Subject';
+import {EventBusService} from '../eventbus/event-bus.service';
 
 @Component({
   selector: 'trm-contacts-list',
@@ -11,7 +12,8 @@ import {Subject} from 'rxjs/internal/Subject';
 })
 export class ContactsListComponent implements OnInit, OnDestroy {
 
-  constructor(private contactsService: ContactsService) {
+  constructor(private contactsService: ContactsService,
+              private eventBusService: EventBusService) {
   }
 
   contacts$: Observable<Array<Contact>>;
@@ -28,6 +30,8 @@ export class ContactsListComponent implements OnInit, OnDestroy {
       )),
       takeUntil(this.unsubscribe$)
     );
+    this.eventBusService.emit('appTitleChange', 'Contact list');
+
     // this.contacts$ = this.term$.pipe(
     //   debounceTime(400),
     //   startWith(''),   => injects a start=value

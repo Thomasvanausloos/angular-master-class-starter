@@ -3,6 +3,7 @@ import {ContactsService} from '../contacts.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Observable} from 'rxjs/internal/Observable';
 import {Contact} from '../models/contact';
+import {EventBusService} from '../eventbus/event-bus.service';
 
 @Component({
   selector: 'trm-contact-detail-vieuw',
@@ -14,11 +15,13 @@ export class ContactDetailVieuwComponent implements OnInit {
 
   constructor(private contactService: ContactsService,
               private activatedRoute: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private eventBusService: EventBusService) {
   }
 
   ngOnInit() {
     this.contact$ = this.contactService.getContactById(this.activatedRoute.snapshot.paramMap.get('id'));
+    this.eventBusService.emit('appTitleChange', 'Contact detail');
   }
 
   navigateToList() {
