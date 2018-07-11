@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs/internal/Subject';
 import {EventbusArgs} from './eventbus-args';
 import {Observable} from 'rxjs/internal/Observable';
-import {filter} from 'rxjs/operators';
+import {filter, map} from 'rxjs/operators';
 
 @Injectable()
 export class EventBusService {
@@ -15,7 +15,8 @@ export class EventBusService {
 
   public observe(eventType: string): Observable<any> {
     return this.messages.pipe(
-      filter(message => message.type === eventType)
+      filter(message => message.type === eventType),
+      map(message => message.data)
     );
   }
 }

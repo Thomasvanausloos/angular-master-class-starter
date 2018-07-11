@@ -3,6 +3,7 @@ import {ContactsService} from '../contacts.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Contact} from '../models/contact';
 import {EventBusService} from '../eventbus/event-bus.service';
+import {MessageTypes} from '../message-types.enum';
 
 @Component({
   selector: 'trm-contacts-editor',
@@ -19,8 +20,11 @@ export class ContactsEditorComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.contactsService.getContactById(this.activatedRoute.snapshot.paramMap.get('id')).subscribe(contact => this.contact = contact);
-    this.eventBusService.emit('appTitleChange', 'Contact edit');
+    this.contactsService.getContactById(this.activatedRoute.snapshot.paramMap.get('id'))
+      .subscribe(contact => {
+        this.contact = contact;
+        this.eventBusService.emit(MessageTypes.APP_TITLE_CHANGE, `Edit: ${this.contact.name}`);
+      });
 
   }
 

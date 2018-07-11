@@ -1,33 +1,23 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+///<reference path="message-types.enum.ts"/>
+import {Component, OnInit} from '@angular/core';
 import {EventBusService} from './eventbus/event-bus.service';
-import {takeUntil} from 'rxjs/operators';
-import {Subject} from 'rxjs/internal/Subject';
+import {MessageTypes} from './message-types.enum';
+import {Observable} from 'rxjs/internal/Observable';
 
 @Component({
   selector: 'trm-contacts-app',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class ContactsAppComponent implements OnInit, OnDestroy {
+export class ContactsAppComponent implements OnInit {
 
-  title: string;
-  private unsubscribe$: Subject<boolean>;
+  title$: Observable<string>;
 
   constructor(private eventBusService: EventBusService) {
   }
 
   ngOnInit(): void {
-    this.eventBusService.observe('appTitleChange').pipe(
-      // takeUntil(this.unsubscribe$)
-    ).subscribe(data => this.title = data.data);
+    this.title$ = this.eventBusService.observe(MessageTypes.APP_TITLE_CHANGE);
 
   }
-
-  ngOnDestroy(): void {
-    this.unsubscribe$.next(true);
-  }
-
-
-
-
 }

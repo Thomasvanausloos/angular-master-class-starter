@@ -7,7 +7,8 @@ import {TabComponent} from '../tab/tab.component';
 })
 export class TabsComponent implements AfterContentInit{
 
-  @ContentChildren(TabComponent)
+  // now it also looks for tabs inside other child components.
+  @ContentChildren(TabComponent, {descendants: true})
   tabs: QueryList<TabComponent>;
 
   public select(tab: TabComponent): void {
