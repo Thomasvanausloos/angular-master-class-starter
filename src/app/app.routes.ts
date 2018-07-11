@@ -4,6 +4,7 @@ import {ContactDetailVieuwComponent} from './contact-detail-vieuw/contact-detail
 import {ContacsDasboardComponent} from './contacs-dasboard/contacs-dasboard.component';
 import {AboutComponent} from './about/about.component';
 import {NavigationGuard} from './guards/navigation-guard';
+import {ContactResolver} from './resolver/contact-resolver';
 
 export const APP_ROUTES: Routes = [
   {
@@ -11,8 +12,13 @@ export const APP_ROUTES: Routes = [
     component: ContacsDasboardComponent,
     children: [
       {path: '', redirectTo: 'contacts/0', pathMatch: 'full'},
-      {path: 'contacts/:id', component: ContactDetailVieuwComponent},
-      {path: 'contacts/:id/edit', component: ContactsEditorComponent, canDeactivate: [NavigationGuard]},
+      {path: 'contacts/:id', component: ContactDetailVieuwComponent, resolve: {contact: ContactResolver}},
+      {
+        path: 'contacts/:id/edit',
+        component: ContactsEditorComponent,
+        resolve: {contact: ContactResolver},
+        canDeactivate: [NavigationGuard]
+      },
     ]
   },
   {path: 'about', component: AboutComponent},

@@ -1,9 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit} from '@angular/core';
 import {ContactsService} from '../contacts.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Contact} from '../models/contact';
 import {EventBusService} from '../eventbus/event-bus.service';
 import {MessageTypes} from '../message-types.enum';
+import {map, tap} from 'rxjs/operators';
+import {Observable} from 'rxjs/internal/Observable';
 
 @Component({
   selector: 'trm-contacts-editor',
@@ -11,8 +13,8 @@ import {MessageTypes} from '../message-types.enum';
 })
 export class ContactsEditorComponent implements OnInit {
 
-  contact: Contact = <Contact>{address: {}};
   pressedSave: boolean;
+  contact$: Observable<Contact>;
 
   constructor(private contactsService: ContactsService,
               private activatedRoute: ActivatedRoute,
@@ -22,11 +24,15 @@ export class ContactsEditorComponent implements OnInit {
 
   ngOnInit() {
     this.pressedSave = false;
-    this.contactsService.getContactById(this.activatedRoute.snapshot.paramMap.get('id'))
-      .subscribe(contact => {
-        this.contact = contact;
-        this.eventBusService.emit(MessageTypes.APP_TITLE_CHANGE, `Edit: ${this.contact.name}`);
-      });
+    this.contact$ = this.activatedRoute.data.pipe(
+      map(data => data['contact']),
+      tap(contact => this.eventBusService.emit(MessageTypes.APP_TITLE_CHANGE, `Edit: ${contact.name}`))
+    );
+    // this.contactsService.getContactById(this.activatedRoute.snapshot.paramMap.get('id'))
+    //   .subscribe(contact => {
+    //     this.contact = contact;
+    //     this.eventBusService.emit(MessageTypes.APP_TITLE_CHANGE, `Edit: ${this.contact.name}`);
+    //   });
 
   }
 

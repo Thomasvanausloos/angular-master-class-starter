@@ -20,6 +20,7 @@ import {EventBusService} from './eventbus/event-bus.service';
 import { AboutComponent } from './about/about.component';
 import { ContacsDasboardComponent } from './contacs-dasboard/contacs-dasboard.component';
 import {NavigationGuard} from './guards/navigation-guard';
+import {ContactResolver} from './resolver/contact-resolver';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import {NavigationGuard} from './guards/navigation-guard';
   providers: [
     ContactsService,
     EventBusService,
-    NavigationGuard
+    NavigationGuard,
+    ContactResolver
   ],
   bootstrap: [ContactsAppComponent]
 })
