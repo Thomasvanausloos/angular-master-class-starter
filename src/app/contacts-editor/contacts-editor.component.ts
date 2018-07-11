@@ -12,6 +12,7 @@ import {MessageTypes} from '../message-types.enum';
 export class ContactsEditorComponent implements OnInit {
 
   contact: Contact = <Contact>{address: {}};
+  pressedSave: boolean;
 
   constructor(private contactsService: ContactsService,
               private activatedRoute: ActivatedRoute,
@@ -20,6 +21,7 @@ export class ContactsEditorComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.pressedSave = false;
     this.contactsService.getContactById(this.activatedRoute.snapshot.paramMap.get('id'))
       .subscribe(contact => {
         this.contact = contact;
@@ -34,6 +36,7 @@ export class ContactsEditorComponent implements OnInit {
 
   save(contact: Contact) {
     this.contactsService.updateContact(contact).subscribe((() => this.goToDetails(contact)));
+    this.pressedSave = true;
   }
 
   private goToDetails(contact: Contact) {
