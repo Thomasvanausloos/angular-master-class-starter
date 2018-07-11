@@ -2,7 +2,6 @@ import {Routes} from '@angular/router';
 import {ContactsEditorComponent} from './contacts-editor/contacts-editor.component';
 import {ContactDetailVieuwComponent} from './contact-detail-vieuw/contact-detail-vieuw.component';
 import {ContacsDasboardComponent} from './contacs-dasboard/contacs-dasboard.component';
-import {AboutComponent} from './about/about.component';
 import {NavigationGuard} from './guards/navigation-guard';
 import {ContactResolver} from './resolver/contact-resolver';
 
@@ -21,6 +20,6 @@ export const APP_ROUTES: Routes = [
       },
     ]
   },
-  {path: 'about', component: AboutComponent},
+  {path: 'about', loadChildren: './about/about.module#AboutModule'},
   {path: '**', redirectTo: ''},
 ];

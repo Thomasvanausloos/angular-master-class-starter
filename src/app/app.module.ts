@@ -13,12 +13,11 @@ import {ContactsDetailComponent} from './contacts-detail/contacts-detail.compone
 import {HttpClientModule} from '@angular/common/http';
 import {ContactsEditorComponent} from './contacts-editor/contacts-editor.component';
 import {FormsModule} from '@angular/forms';
-import { ContactDetailVieuwComponent } from './contact-detail-vieuw/contact-detail-vieuw.component';
-import { TabComponent } from './tabs/tab/tab.component';
-import { TabsComponent } from './tabs/tabs/tabs.component';
+import {ContactDetailVieuwComponent} from './contact-detail-vieuw/contact-detail-vieuw.component';
+import {TabComponent} from './tabs/tab/tab.component';
+import {TabsComponent} from './tabs/tabs/tabs.component';
 import {EventBusService} from './eventbus/event-bus.service';
-import { AboutComponent } from './about/about.component';
-import { ContacsDasboardComponent } from './contacs-dasboard/contacs-dasboard.component';
+import {ContacsDasboardComponent} from './contacs-dasboard/contacs-dasboard.component';
 import {NavigationGuard} from './guards/navigation-guard';
 import {ContactResolver} from './resolver/contact-resolver';
 
@@ -31,7 +30,6 @@ import {ContactResolver} from './resolver/contact-resolver';
     ContactDetailVieuwComponent,
     TabComponent,
     TabsComponent,
-    AboutComponent,
     ContacsDasboardComponent
   ],
   imports: [
