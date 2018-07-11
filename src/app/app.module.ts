@@ -17,6 +17,9 @@ import { ContactDetailVieuwComponent } from './contact-detail-vieuw/contact-deta
 import { TabComponent } from './tabs/tab/tab.component';
 import { TabsComponent } from './tabs/tabs/tabs.component';
 import {EventBusService} from './eventbus/event-bus.service';
+import { AboutComponent } from './about/about.component';
+import { ContacsDasboardComponent } from './contacs-dasboard/contacs-dasboard.component';
+import {NavigationGuard} from './guards/navigation-guard';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,9 @@ import {EventBusService} from './eventbus/event-bus.service';
     ContactsEditorComponent,
     ContactDetailVieuwComponent,
     TabComponent,
-    TabsComponent
+    TabsComponent,
+    AboutComponent,
+    ContacsDasboardComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +44,8 @@ import {EventBusService} from './eventbus/event-bus.service';
   ],
   providers: [
     ContactsService,
-    EventBusService
+    EventBusService,
+    NavigationGuard
   ],
   bootstrap: [ContactsAppComponent]
 })

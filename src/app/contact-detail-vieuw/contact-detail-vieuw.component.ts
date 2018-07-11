@@ -5,7 +5,7 @@ import {Observable} from 'rxjs/internal/Observable';
 import {Contact} from '../models/contact';
 import {EventBusService} from '../eventbus/event-bus.service';
 import {MessageTypes} from '../message-types.enum';
-import {tap} from 'rxjs/operators';
+import {switchMap, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'trm-contact-detail-vieuw',
@@ -22,9 +22,16 @@ export class ContactDetailVieuwComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.contact$ = this.contactService.getContactById(this.activatedRoute.snapshot.paramMap.get('id')).pipe(
+    this.activatedRoute.paramMap.pipe(
+      switchMap(paraMap => this.contact$ = this.contactService.getContactById(paraMap.get('id'))),
       tap(contact => this.eventBusService.emit(MessageTypes.APP_TITLE_CHANGE, contact.name))
-    );
+    ).subscribe();
+
+    // this.activatedRoute.params.subscribe(params => {
+    //   this.contact$ = this.contactService.getContactById(params['id']).pipe(
+    //     tap(contact => this.eventBusService.emit(MessageTypes.APP_TITLE_CHANGE, contact.name))
+    //   );
+    // });
   }
 
   navigateToList() {
